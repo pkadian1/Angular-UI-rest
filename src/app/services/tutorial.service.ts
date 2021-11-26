@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { NgModule } from '@angular/core';
 
-const baseUrl = 'http://localhost:8080/kie-server/services/rest/server/containers/star-health_1.0.0-SNAPSHOT/processes/star-health.medical-claim/instances';
+const baseUrl = "http://localhost:8080/kie-server/services/rest/server/containers/star-health_1.0.0-SNAPSHOT/processes?page=0&pageSize=10&sortOrder=true";
 
 //@Injectable()
 @Injectable({
@@ -19,20 +19,31 @@ export class TutorialService {
   getAll() {
     //return this.http.get(baseUrl);
     console.log("inside service ");
-    return this.http.get(`${baseUrl}/users`);
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + btoa('pamAdmin:redhatpam1!')
+      })
+    };
+    
+    return this.http.get(`${baseUrl}`, { headers: headers });
+    //return this.http.get(url, { headers: new HttpHeaders({'Authorization': 'Bearer ' + token})
+ 
   }
 
-  data= {
-    "data" : 
-    {
-      "diagnosis-name": "Maternity",
-       "gender":"Female",
-        "age": 20
-      }}
+  // data= {
+  //   "data" : 
+  //   {
+  //     "diagnosis-name": "Maternity",
+  //      "gender":"Female",
+  //       "age": 20
+  //     }}
       
-  create(data: any) {
-    return this.http.post(baseUrl, data);
-  }
+  // create(data: any) {
+  //   return this.http.post(baseUrl, data);
+  // }
 
   /*get(users: any) {
     return this.http.get(`${baseUrl}/users`);

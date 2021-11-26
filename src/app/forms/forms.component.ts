@@ -181,14 +181,14 @@ export class FormsComponent implements OnInit {
       });
 
       
-      this.tutorialService.create(value)
-      .subscribe(
-        response => {
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        });
+      // this.tutorialService.create(value)
+      // .subscribe(
+      //   response => {
+      //     console.log(response);
+      //   },
+      //   error => {
+      //     console.log(error);
+      //   });
   }
 
 }
